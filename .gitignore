@@ -45,3 +45,7 @@ lab/
 # Type checker / linter / test caches
 .ruff_cache/
 .pytest_cache/
+
+# Local research environment and private runtime state
+.venv/
+local_workspace/
