@@ -29,7 +29,7 @@ uv pip install --python .venv/bin/python -r local_setup/requirements.lock
 - VeighNa 4.5.0、Python 3.12 和官方模块安装成功，桌面主窗口、数据管理和 CTA 回测窗口能够打开。
 - `import_sample.py` 导入并读回 424 根日线，末条收盘价 9.48。
 - `check_backtest.py` 调用官方 DoubleMaStrategy 完成 424 个交易日、29 笔成交的连通性验证；结果保存在本地 `acceptance.json` 与 `connectivity-backtest.csv`。
-- 上述回测由脚本运行，尚未完成逐项桌面交互验收；数据管理树的样本展开显示也需继续检查。
+- 已追加桌面回测及29笔成交明细验收；K线、其余明细和数据管理树展开仍待逐项检查。
 - 样例允许做空；此结果不代表 A 股交易规则、实盘或实时模拟验收通过。
 
 重新运行引擎验证：
@@ -37,3 +37,5 @@ uv pip install --python .venv/bin/python -r local_setup/requirements.lock
 ```sh
 .venv/bin/python local_setup/check_backtest.py
 ```
+
+桌面兼容修复：pandas 3.0.6 与当前 pyqtgraph 对日期索引 Series 的读取不兼容，回测完成后绘图报 KeyError: 0。锁定 pandas 2.3.3 后，桌面回测结果及成交明细恢复。升级该依赖时必须重做桌面图表验收。功能状态见 FEATURE_STATUS.md。
